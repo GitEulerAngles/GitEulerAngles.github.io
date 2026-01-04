@@ -1,30 +1,273 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your Name | Portfolio</title>
-    <style>
-      body { font-family: system-ui, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 16px; }
-      a { text-decoration: none; }
-      .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin: 12px 0; }
-    </style>
-  </head>
-  <body>
-    <h1>Your Name</h1>
-    <p>Short intro: what you build, what roles you want.</p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio site for Keith Kuhlman" />
+  <title>Keith Kuhlman | Portfolio</title>
 
-    <h2>Projects</h2>
-    <div class="card">
-      <h3>Project Title</h3>
-      <p>1 sentence on what it does. Tech: X, Y, Z.</p>
-      <p>
-        <a href="https://github.com/yourusername/yourrepo">GitHub</a> |
-        <a href="https://your-demo-link.com">Live Demo</a>
-      </p>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">KK</div>
+        <div>
+          <div class="brand-name">Keith Kuhlman</div>
+          <div class="brand-subtitle">
+            <span class="typing" id="typingText" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-ghost" href="#top">Top</a>
+      </nav>
     </div>
+  </header>
 
-    <h2>Contact</h2>
-    <p><a href="mailto:you@email.com">you@email.com</a> • <a href="https://www.linkedin.com/in/yourname/">LinkedIn</a></p>
-  </body>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1 class="headline">
+            I build software and ship projects that people can actually use.
+          </h1>
+
+          <p class="lede">
+            This is a curated set of work I have done over several years: full stack apps, tooling, coursework, and experiments.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+
+          <div class="quick-facts">
+            <div class="fact">
+              <div class="fact-label">Email</div>
+              <a class="fact-value" href="mailto:keith@example.com">keith@example.com</a>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Phone</div>
+              <a class="fact-value" href="tel:+11234567890">(123) 456-7890</a>
+            </div>
+            <div class="fact">
+              <div class="fact-label">Links</div>
+              <div class="fact-value">
+                <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
+                <span class="sep">•</span>
+                <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noreferrer">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-card reveal">
+            <div class="hero-card-top">
+              <div class="pill">Highlights</div>
+              <div class="pill pill-muted" id="projectCountPill">0 projects</div>
+            </div>
+
+            <ul class="bullets">
+              <li>Filter projects by type (web, backend, tooling, research).</li>
+              <li>Click any project for a details modal.</li>
+              <li>Scroll animations included, no libraries.</li>
+            </ul>
+
+            <div class="hero-metrics">
+              <div class="metric">
+                <div class="metric-num" id="metricYears">0+</div>
+                <div class="metric-label">Years</div>
+              </div>
+              <div class="metric">
+                <div class="metric-num" id="metricProjects">0+</div>
+                <div class="metric-label">Projects</div>
+              </div>
+              <div class="metric">
+                <div class="metric-num" id="metricFocus">Full stack</div>
+                <div class="metric-label">Focus</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-card reveal" aria-hidden="true">
+            <div class="dot"></div>
+            <div>
+              <div class="floating-title">Currently</div>
+              <div class="floating-subtitle">Curating and polishing work samples</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bg" aria-hidden="true"></div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p class="muted">A few representative projects. Add as many as you want in <code>script.js</code>.</p>
+        </div>
+
+        <div class="controls reveal">
+          <div class="filters" role="tablist" aria-label="Project filters">
+            <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="chip" data-filter="web" role="tab" aria-selected="false">Web</button>
+            <button class="chip" data-filter="backend" role="tab" aria-selected="false">Backend</button>
+            <button class="chip" data-filter="tooling" role="tab" aria-selected="false">Tooling</button>
+            <button class="chip" data-filter="research" role="tab" aria-selected="false">Research</button>
+          </div>
+
+          <div class="search">
+            <label class="sr-only" for="searchInput">Search projects</label>
+            <input id="searchInput" type="search" placeholder="Search projects..." autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="grid" id="projectGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section alt" id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>About</h2>
+          <p class="muted">Short, direct, and easy to skim.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="card reveal">
+            <h3>What I do</h3>
+            <p>
+              I build end to end software: front end UI, APIs, databases, and automation. I care about clarity, reliability,
+              and making things that other people can understand and maintain.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <h3>Skills</h3>
+            <div class="tag-row" id="skillsRow"></div>
+          </div>
+
+          <div class="card reveal">
+            <h3>What you will find here</h3>
+            <ul class="bullets">
+              <li>Clean project summaries and links</li>
+              <li>Tech stacks and responsibilities</li>
+              <li>Selected screenshots and writeups (optional)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p class="muted">Fastest way to reach me.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card reveal">
+            <h3>Direct</h3>
+            <div class="contact-lines">
+              <div class="contact-line">
+                <span class="contact-k">Name</span>
+                <span class="contact-v">Keith Kuhlman</span>
+              </div>
+              <div class="contact-line">
+                <span class="contact-k">Email</span>
+                <a class="contact-v" href="mailto:keith@example.com">keith@example.com</a>
+              </div>
+              <div class="contact-line">
+                <span class="contact-k">Phone</span>
+                <a class="contact-v" href="tel:+11234567890">(123) 456-7890</a>
+              </div>
+            </div>
+
+            <div class="contact-actions">
+              <a class="btn btn-primary" href="mailto:keith@example.com?subject=Portfolio%20Inquiry">Email me</a>
+              <button class="btn btn-ghost" id="copyEmailBtn" type="button">Copy email</button>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3>Message</h3>
+            <p class="muted">
+              This form uses a mailto link (free, no backend). If you want a real form later, use Formspree or Netlify Forms.
+            </p>
+
+            <form id="mailtoForm">
+              <div class="field">
+                <label for="msgName">Your name</label>
+                <input id="msgName" name="name" type="text" placeholder="Jane Doe" required />
+              </div>
+
+              <div class="field">
+                <label for="msgEmail">Your email</label>
+                <input id="msgEmail" name="email" type="email" placeholder="jane@domain.com" required />
+              </div>
+
+              <div class="field">
+                <label for="msgBody">Message</label>
+                <textarea id="msgBody" name="body" rows="5" placeholder="What would you like to talk about?" required></textarea>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Open email draft</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="muted">© <span id="year"></span> Keith Kuhlman</div>
+      <div class="footer-links">
+        <a href="#top">Back to top</a>
+        <span class="sep">•</span>
+        <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">Project</h3>
+          <p class="modal-subtitle" id="modalSubtitle"></p>
+        </div>
+        <button class="icon-btn" id="modalCloseBtn" type="button" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="meta-row" id="modalMeta"></div>
+        <p id="modalDesc"></p>
+        <ul class="bullets" id="modalBullets"></ul>
+
+        <div class="modal-actions" id="modalActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
