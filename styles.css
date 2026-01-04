@@ -91,7 +91,7 @@ code{
   box-shadow: var(--shadow);
 }
 .brand-name{ font-weight: 800; letter-spacing: 0.2px; }
-.brand-subtitle{ color: var(--muted); font-size: 0.92rem; min-height: 1.2em; }
+.brand-subtitle{ color: var(--muted); font-size: 0.92rem; }
 
 .nav{
   display: flex;

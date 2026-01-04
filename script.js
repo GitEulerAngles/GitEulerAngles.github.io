@@ -369,7 +369,4 @@ window.addEventListener("DOMContentLoaded", async () => {
   setupSmoothScroll();
   setupCopyEmail();
   setupMailtoForm();
-
-  const typingEl = document.getElementById("typingText");
-  runTyping(typingEl);
 });
