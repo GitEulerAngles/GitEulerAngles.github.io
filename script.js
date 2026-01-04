@@ -223,31 +223,55 @@ function closeModal() {
 function setupModalHandlers() {
   const backdrop = document.getElementById("modalBackdrop");
   const closeBtn = document.getElementById("modalCloseBtn");
+  const grid = document.getElementById("projectGrid");
 
-  closeBtn.addEventListener("click", closeModal);
+  function isOpen() {
+    return !backdrop.hidden;
+  }
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeModal();
+  });
 
   backdrop.addEventListener("click", (e) => {
-    if (e.target === backdrop) closeModal();
+    if (e.target === backdrop) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal();
+    }
   });
 
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !backdrop.hidden) closeModal();
+    if (e.key === "Escape" && isOpen()) closeModal();
   });
 
-  document.addEventListener("click", (e) => {
+  // Only open from inside the Projects grid
+  grid.addEventListener("click", (e) => {
+    if (isOpen()) return;
     const card = e.target.closest(".project-card");
     if (!card) return;
+
     const idx = Number(card.dataset.index);
+    if (!Number.isFinite(idx)) return;
+
     const project = PROJECTS[idx];
     if (project) openModal(project);
   });
 
-  document.addEventListener("keydown", (e) => {
+  // Keyboard open for focused card inside the grid
+  grid.addEventListener("keydown", (e) => {
+    if (isOpen()) return;
     if (e.key !== "Enter" && e.key !== " ") return;
+
     const card = document.activeElement?.closest?.(".project-card");
     if (!card) return;
+
     e.preventDefault();
     const idx = Number(card.dataset.index);
+    if (!Number.isFinite(idx)) return;
+
     const project = PROJECTS[idx];
     if (project) openModal(project);
   });
