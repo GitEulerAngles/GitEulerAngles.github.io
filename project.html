@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Project details" />
+  <title>Project | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">KK</div>
+        <div>
+          <div class="brand-name">Kurt Kuhlman</div>
+          <div class="brand-subtitle">Portfolio</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="btn btn-ghost" href="index.html#projects">Back</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="meta-row">
+          <a class="btn btn-ghost" href="index.html#projects">Back to projects</a>
+        </div>
+
+        <div class="card reveal">
+          <div class="project-top" style="align-items: baseline;">
+            <div>
+              <h1 id="projectTitle" class="headline" style="margin: 0 0 8px;">Project Title</h1>
+              <p id="projectSubtitle" class="muted" style="margin: 0 0 14px;">Project subtitle</p>
+            </div>
+            <div class="project-tag" id="projectCategoryTag">Project</div>
+          </div>
+
+          <div class="project-stack" id="projectMeta" style="margin: 12px 0 14px;"></div>
+
+          <p id="projectDesc" class="lede" style="margin: 0 0 16px;"></p>
+
+          <h3 style="margin: 18px 0 8px;">Highlights</h3>
+          <ul class="bullets" id="projectBullets"></ul>
+
+          <div class="contact-actions" id="projectActions" style="margin-top: 18px;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="muted">© <span id="year"></span> Keith Kuhlman</div>
+      <div class="footer-links">
+        <a href="index.html#projects">Projects</a>
+        <span class="sep">•</span>
+        <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@ const SKILLS = [
 
 const PROJECTS = [
   {
+    slug: "nspire-platform",
     title: "NSPIRE Platform",
     subtitle: "Full stack equipment & services platform",
     category: "web",
@@ -26,6 +27,7 @@ const PROJECTS = [
     ]
   },
   {
+    slug: "apk-analyzer",
     title: "APK Analyzer (Static Risk Scoring)",
     subtitle: "Cross platform tooling for APK inspection",
     category: "tooling",
@@ -43,6 +45,7 @@ const PROJECTS = [
     ]
   },
   {
+    slug: "data-modeling-projects",
     title: "Data Modeling Projects",
     subtitle: "Schemas, constraints, and validation utilities",
     category: "backend",
@@ -60,6 +63,7 @@ const PROJECTS = [
     ]
   },
   {
+    slug: "research-surface-coatings",
     title: "Surface Coatings and Catalysts Work",
     subtitle: "Research portfolio highlights",
     category: "research",
@@ -82,6 +86,8 @@ const PROJECTS = [
 
 function setupReveal() {
   const els = document.querySelectorAll(".reveal");
+  if (!els.length) return;
+
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {
@@ -129,41 +135,46 @@ function tagForCategory(cat) {
   return map[cat] || "Project";
 }
 
-function projectCard(project, idx) {
+function projectHref(project) {
+  const slug = project.slug ? String(project.slug) : "";
+  return `project.html?slug=${encodeURIComponent(slug)}`;
+}
+
+function projectCard(project) {
   const stackHtml = (project.stack || [])
     .slice(0, 6)
     .map((s) => `<span class="tag">${escapeHtml(s)}</span>`)
     .join("");
 
   return `
-    <article class="card project-card reveal" data-index="${idx}" tabindex="0" role="button" aria-label="Open project: ${escapeAttr(project.title)}">
+    <a class="card project-card reveal"
+       href="${escapeAttr(projectHref(project))}"
+       aria-label="Open project: ${escapeAttr(project.title)}">
       <div class="project-top">
         <h3 class="project-title">${escapeHtml(project.title)}</h3>
         <div class="project-tag">${tagForCategory(project.category)}</div>
       </div>
       <p class="project-desc">${escapeHtml(project.description)}</p>
       <div class="project-stack">${stackHtml}</div>
-    </article>
+    </a>
   `;
 }
 
 function renderProjects() {
   const grid = document.getElementById("projectGrid");
+  if (!grid) return;
+
   const filtered = PROJECTS.filter(matchesFilter);
+  grid.innerHTML = filtered.map((p) => projectCard(p)).join("");
 
-  grid.innerHTML = filtered.map((p) => projectCard(p, PROJECTS.indexOf(p))).join("");
-
-  // Re-attach reveal observer to newly injected cards
   setupReveal();
 
-  // Update counts in hero
   const countPill = document.getElementById("projectCountPill");
-  countPill.textContent = `${PROJECTS.length} projects`;
+  if (countPill) countPill.textContent = `${PROJECTS.length} projects`;
 
   const metricProjects = document.getElementById("metricProjects");
-  metricProjects.textContent = `${PROJECTS.length}+`;
+  if (metricProjects) metricProjects.textContent = `${PROJECTS.length}+`;
 
-  // If nothing matches
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="card reveal" style="grid-column: 1 / -1;">
@@ -175,112 +186,74 @@ function renderProjects() {
   }
 }
 
-/* ====== Modal ====== */
+/* ====== Project details page render ====== */
 
-function openModal(project) {
-  const backdrop = document.getElementById("modalBackdrop");
-  const title = document.getElementById("modalTitle");
-  const subtitle = document.getElementById("modalSubtitle");
-  const meta = document.getElementById("modalMeta");
-  const desc = document.getElementById("modalDesc");
-  const bullets = document.getElementById("modalBullets");
-  const actions = document.getElementById("modalActions");
+function getProjectFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = (params.get("slug") || "").trim();
+  if (!slug) return null;
+  return PROJECTS.find((p) => String(p.slug) === slug) || null;
+}
 
-  title.textContent = project.title;
-  subtitle.textContent = project.subtitle || "";
+function renderProjectPage() {
+  const titleEl = document.getElementById("projectTitle");
+  const subtitleEl = document.getElementById("projectSubtitle");
+  const categoryTagEl = document.getElementById("projectCategoryTag");
+  const metaEl = document.getElementById("projectMeta");
+  const descEl = document.getElementById("projectDesc");
+  const bulletsEl = document.getElementById("projectBullets");
+  const actionsEl = document.getElementById("projectActions");
+
+  const onProjectPage =
+    titleEl && subtitleEl && categoryTagEl && metaEl && descEl && bulletsEl && actionsEl;
+
+  if (!onProjectPage) return;
+
+  const project = getProjectFromUrl();
+  if (!project) {
+    titleEl.textContent = "Project not found";
+    subtitleEl.textContent = "That link does not match any project.";
+    categoryTagEl.textContent = "Project";
+    metaEl.innerHTML = "";
+    descEl.textContent = "Go back and pick a project from the list.";
+    bulletsEl.innerHTML = "";
+    actionsEl.innerHTML = `<a class="btn btn-primary" href="index.html#projects">Back to projects</a>`;
+    document.title = "Project not found | Portfolio";
+    return;
+  }
+
+  titleEl.textContent = project.title;
+  subtitleEl.textContent = project.subtitle || "";
+  categoryTagEl.textContent = tagForCategory(project.category);
 
   const metaTags = [
-    project.category ? tagForCategory(project.category) : null,
     project.year || null,
-    ...(project.stack || []).slice(0, 8)
+    ...(project.stack || []).slice(0, 10)
   ].filter(Boolean);
 
-  meta.innerHTML = metaTags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("");
+  metaEl.innerHTML = metaTags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("");
+  descEl.textContent = project.description || "";
 
-  desc.textContent = project.description || "";
-
-  bullets.innerHTML = (project.highlights || [])
+  bulletsEl.innerHTML = (project.highlights || [])
     .map((h) => `<li>${escapeHtml(h)}</li>`)
     .join("");
 
-  actions.innerHTML = (project.links || [])
-    .map((l) => `<a class="btn btn-primary" href="${escapeAttr(l.url)}" target="_blank" rel="noreferrer">${escapeHtml(l.label)}</a>`)
+  actionsEl.innerHTML = (project.links || [])
+    .map(
+      (l) =>
+        `<a class="btn btn-primary" href="${escapeAttr(l.url)}" target="_blank" rel="noreferrer">${escapeHtml(l.label)}</a>`
+    )
     .join("");
 
-  backdrop.hidden = false;
-  document.body.classList.add("modal-open");
-
-  const closeBtn = document.getElementById("modalCloseBtn");
-  closeBtn.focus();
-}
-
-function closeModal() {
-  const backdrop = document.getElementById("modalBackdrop");
-  backdrop.hidden = true;
-  document.body.classList.remove("modal-open");
-}
-
-function setupModalHandlers() {
-  const backdrop = document.getElementById("modalBackdrop");
-  const closeBtn = document.getElementById("modalCloseBtn");
-  const grid = document.getElementById("projectGrid");
-
-  function isOpen() {
-    return !backdrop.hidden;
-  }
-
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    closeModal();
-  });
-
-  backdrop.addEventListener("click", (e) => {
-    if (e.target === backdrop) {
-      e.preventDefault();
-      e.stopPropagation();
-      closeModal();
-    }
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && isOpen()) closeModal();
-  });
-
-  // Only open from inside the Projects grid
-  grid.addEventListener("click", (e) => {
-    if (isOpen()) return;
-    const card = e.target.closest(".project-card");
-    if (!card) return;
-
-    const idx = Number(card.dataset.index);
-    if (!Number.isFinite(idx)) return;
-
-    const project = PROJECTS[idx];
-    if (project) openModal(project);
-  });
-
-  // Keyboard open for focused card inside the grid
-  grid.addEventListener("keydown", (e) => {
-    if (isOpen()) return;
-    if (e.key !== "Enter" && e.key !== " ") return;
-
-    const card = document.activeElement?.closest?.(".project-card");
-    if (!card) return;
-
-    e.preventDefault();
-    const idx = Number(card.dataset.index);
-    if (!Number.isFinite(idx)) return;
-
-    const project = PROJECTS[idx];
-    if (project) openModal(project);
-  });
+  document.title = `${project.title} | Portfolio`;
 }
 
 /* ====== Filters + search ====== */
 
 function setupFilters() {
   const buttons = document.querySelectorAll(".chip");
+  if (!buttons.length) return;
+
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       buttons.forEach((b) => {
@@ -297,6 +270,8 @@ function setupFilters() {
   });
 
   const input = document.getElementById("searchInput");
+  if (!input) return;
+
   input.addEventListener("input", () => {
     activeSearch = input.value || "";
     renderProjects();
@@ -321,6 +296,8 @@ function setupSmoothScroll() {
 
 function setupCopyEmail() {
   const btn = document.getElementById("copyEmailBtn");
+  if (!btn) return;
+
   btn.addEventListener("click", async () => {
     const email = "keith@example.com"; // update
     try {
@@ -336,6 +313,8 @@ function setupCopyEmail() {
 
 function setupMailtoForm() {
   const form = document.getElementById("mailtoForm");
+  if (!form) return;
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.getElementById("msgName").value.trim();
@@ -365,30 +344,38 @@ function escapeAttr(str) {
 
 function initCounts() {
   const yearEl = document.getElementById("year");
-  yearEl.textContent = new Date().getFullYear();
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Set these to whatever you want
-  document.getElementById("metricYears").textContent = "5+";
-  document.getElementById("metricFocus").textContent = "Full stack";
+  const yearsEl = document.getElementById("metricYears");
+  if (yearsEl) yearsEl.textContent = "5+";
 
-  document.getElementById("metricProjects").textContent = `${PROJECTS.length}+`;
-  document.getElementById("projectCountPill").textContent = `${PROJECTS.length} projects`;
+  const focusEl = document.getElementById("metricFocus");
+  if (focusEl) focusEl.textContent = "Full stack";
+
+  const projectsEl = document.getElementById("metricProjects");
+  if (projectsEl) projectsEl.textContent = `${PROJECTS.length}+`;
+
+  const countPill = document.getElementById("projectCountPill");
+  if (countPill) countPill.textContent = `${PROJECTS.length} projects`;
 }
 
 function renderSkills() {
   const row = document.getElementById("skillsRow");
+  if (!row) return;
   row.innerHTML = SKILLS.map((s) => `<span class="tag">${escapeHtml(s)}</span>`).join("");
 }
 
 /* ====== Start ====== */
 
-window.addEventListener("DOMContentLoaded", async () => {
+window.addEventListener("DOMContentLoaded", () => {
   initCounts();
   renderSkills();
 
   renderProjects();
   setupFilters();
-  setupModalHandlers();
+
+  renderProjectPage();
+
   setupReveal();
   setupSmoothScroll();
   setupCopyEmail();
