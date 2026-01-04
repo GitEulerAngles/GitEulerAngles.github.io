@@ -78,38 +78,6 @@ const PROJECTS = [
   }
 ];
 
-/* ====== Typing animation ====== */
-
-const typingPhrases = [
-  "Full stack developer",
-  "Tooling and automation",
-  "Clean UI and strong systems",
-  "Projects that ship"
-];
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-async function runTyping(el) {
-  let i = 0;
-  while (true) {
-    const phrase = typingPhrases[i % typingPhrases.length];
-    el.textContent = "";
-    for (let c = 0; c < phrase.length; c++) {
-      el.textContent += phrase[c];
-      await sleep(30);
-    }
-    await sleep(900);
-    for (let c = phrase.length; c >= 0; c--) {
-      el.textContent = phrase.slice(0, c);
-      await sleep(18);
-    }
-    await sleep(220);
-    i++;
-  }
-}
-
 /* ====== Reveal on scroll ====== */
 
 function setupReveal() {
