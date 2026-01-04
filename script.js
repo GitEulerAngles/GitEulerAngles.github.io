@@ -6,6 +6,8 @@ const SKILLS = [
   "REST APIs", "UI/UX", "Testing", "CI/CD"
 ];
 
+// Each project must have a unique slug.
+// This slug maps to a custom page at: projects/<slug>/index.html
 const PROJECTS = [
   {
     slug: "nspire-platform",
@@ -63,7 +65,7 @@ const PROJECTS = [
     ]
   },
   {
-    slug: "research-surface-coatings",
+    slug: "surface-coatings-and-catalysts",
     title: "Surface Coatings and Catalysts Work",
     subtitle: "Research portfolio highlights",
     category: "research",
@@ -117,6 +119,7 @@ function matchesFilter(project) {
     project.description,
     project.category,
     project.year,
+    project.slug,
     ...(project.stack || [])
   ]
     .join(" ")
@@ -136,8 +139,8 @@ function tagForCategory(cat) {
 }
 
 function projectHref(project) {
-  const slug = project.slug ? String(project.slug) : "";
-  return `project.html?slug=${encodeURIComponent(slug)}`;
+  const slug = String(project.slug || "").trim();
+  return `projects/${encodeURIComponent(slug)}/index.html`;
 }
 
 function projectCard(project) {
@@ -147,9 +150,7 @@ function projectCard(project) {
     .join("");
 
   return `
-    <a class="card project-card reveal"
-       href="${escapeAttr(projectHref(project))}"
-       aria-label="Open project: ${escapeAttr(project.title)}">
+    <a class="card project-card reveal" href="${escapeAttr(projectHref(project))}" aria-label="Open project: ${escapeAttr(project.title)}">
       <div class="project-top">
         <h3 class="project-title">${escapeHtml(project.title)}</h3>
         <div class="project-tag">${tagForCategory(project.category)}</div>
@@ -184,68 +185,6 @@ function renderProjects() {
     `;
     setupReveal();
   }
-}
-
-/* ====== Project details page render ====== */
-
-function getProjectFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = (params.get("slug") || "").trim();
-  if (!slug) return null;
-  return PROJECTS.find((p) => String(p.slug) === slug) || null;
-}
-
-function renderProjectPage() {
-  const titleEl = document.getElementById("projectTitle");
-  const subtitleEl = document.getElementById("projectSubtitle");
-  const categoryTagEl = document.getElementById("projectCategoryTag");
-  const metaEl = document.getElementById("projectMeta");
-  const descEl = document.getElementById("projectDesc");
-  const bulletsEl = document.getElementById("projectBullets");
-  const actionsEl = document.getElementById("projectActions");
-
-  const onProjectPage =
-    titleEl && subtitleEl && categoryTagEl && metaEl && descEl && bulletsEl && actionsEl;
-
-  if (!onProjectPage) return;
-
-  const project = getProjectFromUrl();
-  if (!project) {
-    titleEl.textContent = "Project not found";
-    subtitleEl.textContent = "That link does not match any project.";
-    categoryTagEl.textContent = "Project";
-    metaEl.innerHTML = "";
-    descEl.textContent = "Go back and pick a project from the list.";
-    bulletsEl.innerHTML = "";
-    actionsEl.innerHTML = `<a class="btn btn-primary" href="index.html#projects">Back to projects</a>`;
-    document.title = "Project not found | Portfolio";
-    return;
-  }
-
-  titleEl.textContent = project.title;
-  subtitleEl.textContent = project.subtitle || "";
-  categoryTagEl.textContent = tagForCategory(project.category);
-
-  const metaTags = [
-    project.year || null,
-    ...(project.stack || []).slice(0, 10)
-  ].filter(Boolean);
-
-  metaEl.innerHTML = metaTags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("");
-  descEl.textContent = project.description || "";
-
-  bulletsEl.innerHTML = (project.highlights || [])
-    .map((h) => `<li>${escapeHtml(h)}</li>`)
-    .join("");
-
-  actionsEl.innerHTML = (project.links || [])
-    .map(
-      (l) =>
-        `<a class="btn btn-primary" href="${escapeAttr(l.url)}" target="_blank" rel="noreferrer">${escapeHtml(l.label)}</a>`
-    )
-    .join("");
-
-  document.title = `${project.title} | Portfolio`;
 }
 
 /* ====== Filters + search ====== */
@@ -317,9 +256,9 @@ function setupMailtoForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const name = document.getElementById("msgName").value.trim();
-    const from = document.getElementById("msgEmail").value.trim();
-    const body = document.getElementById("msgBody").value.trim();
+    const name = document.getElementById("msgName")?.value?.trim?.() || "";
+    const from = document.getElementById("msgEmail")?.value?.trim?.() || "";
+    const body = document.getElementById("msgBody")?.value?.trim?.() || "";
 
     const to = "keith@example.com"; // update
     const subject = encodeURIComponent(`Portfolio message from ${name || "someone"}`);
@@ -346,17 +285,17 @@ function initCounts() {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const yearsEl = document.getElementById("metricYears");
-  if (yearsEl) yearsEl.textContent = "5+";
+  const metricYears = document.getElementById("metricYears");
+  if (metricYears) metricYears.textContent = "5+";
 
-  const focusEl = document.getElementById("metricFocus");
-  if (focusEl) focusEl.textContent = "Full stack";
+  const metricFocus = document.getElementById("metricFocus");
+  if (metricFocus) metricFocus.textContent = "Full stack";
 
-  const projectsEl = document.getElementById("metricProjects");
-  if (projectsEl) projectsEl.textContent = `${PROJECTS.length}+`;
+  const metricProjects = document.getElementById("metricProjects");
+  if (metricProjects) metricProjects.textContent = `${PROJECTS.length}+`;
 
-  const countPill = document.getElementById("projectCountPill");
-  if (countPill) countPill.textContent = `${PROJECTS.length} projects`;
+  const projectCountPill = document.getElementById("projectCountPill");
+  if (projectCountPill) projectCountPill.textContent = `${PROJECTS.length} projects`;
 }
 
 function renderSkills() {
@@ -370,12 +309,8 @@ function renderSkills() {
 window.addEventListener("DOMContentLoaded", () => {
   initCounts();
   renderSkills();
-
   renderProjects();
   setupFilters();
-
-  renderProjectPage();
-
   setupReveal();
   setupSmoothScroll();
   setupCopyEmail();

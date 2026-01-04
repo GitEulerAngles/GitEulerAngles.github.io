@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Surface Coatings and Catalysts Work project page" />
+  <title>Surface Coatings and Catalysts | Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="back" href="../../index.html#projects">Back to projects</a>
+      <div class="title">Surface Coatings and Catalysts Work</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Research portfolio highlights</h1>
+      <p class="muted">
+        Selected work focused on surfaces, catalysts, and repeatable characterization workflows.
+      </p>
+      <div class="tabs" role="tablist" aria-label="Sections">
+        <button class="tab active" data-tab="workflows" role="tab" aria-selected="true">Workflows</button>
+        <button class="tab" data-tab="tools" role="tab" aria-selected="false">Tools</button>
+        <button class="tab" data-tab="outputs" role="tab" aria-selected="false">Outputs</button>
+      </div>
+    </section>
+
+    <section class="card" id="workflows" data-pane>
+      <h2>Workflows</h2>
+      <ul class="bullets">
+        <li>Sample preparation and repeatable batch processing</li>
+        <li>Surface characterization and electrochem measurements</li>
+        <li>Analysis scripts for clean plots and summaries</li>
+      </ul>
+      <div class="placeholder">Drop screenshots here later (plots, setups, results)</div>
+    </section>
+
+    <section class="card" id="tools" data-pane hidden>
+      <h2>Instrumentation and tools</h2>
+      <div class="chips">
+        <span class="chip">XPS</span>
+        <span class="chip">SEM</span>
+        <span class="chip">ICP-MS</span>
+        <span class="chip">NMR</span>
+        <span class="chip">GC-MS</span>
+        <span class="chip">CV / EIS</span>
+      </div>
+      <p class="muted" style="margin-top: 12px;">
+        Add a short note here about what you personally owned, built, or optimized.
+      </p>
+    </section>
+
+    <section class="card" id="outputs" data-pane hidden>
+      <h2>Outputs</h2>
+      <ul class="bullets">
+        <li>Publication quality figures and data summaries</li>
+        <li>Documentation and reproducibility notes</li>
+        <li>Presentations, posters, and writeups</li>
+      </ul>
+
+      <div class="actions" id="links">
+        <a class="btn primary" href="https://your-site.example.com/research" target="_blank" rel="noreferrer">Writeup</a>
+        <button class="btn" id="copyBtn" type="button">Copy page link</button>
+      </div>
+      <div class="muted" id="toast" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">© <span id="year"></span></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

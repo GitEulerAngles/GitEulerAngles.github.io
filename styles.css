@@ -349,9 +349,13 @@ code{
   padding: 16px;
 }
 .project-card{
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
   display: block;
   text-decoration: none;
   color: inherit;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 .project-card:hover{
   transform: translateY(-2px);
