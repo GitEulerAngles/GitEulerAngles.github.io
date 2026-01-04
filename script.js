@@ -10,14 +10,14 @@ const SKILLS = [
 // This slug maps to a custom page at: projects/<slug>/index.html
 const PROJECTS = [
   {
-    slug: "nspire-platform",
-    title: "NSPIRE Platform",
-    subtitle: "Full stack equipment & services platform",
-    category: "web",
+    slug: "minecraft",
+    title: "Minecraft",
+    subtitle: "Independently developed a self-made Minecraft clone using OpenGL and C++",
+    category: "game",
     year: "2025",
     description:
-      "A web platform to discover and request research equipment and services. Focused on usability and clear workflows.",
-    stack: ["Angular", ".NET", "MySQL", "Azure"],
+      "An independently developed game in the style of Minecraft the utilizes chunk optimization, OpenGL, and various game development techniques.",
+    stack: ["C++", "OpenGL"],
     highlights: [
       "Built responsive UI with clear navigation and filtering.",
       "Designed API endpoints and data models for request workflows.",
@@ -26,60 +26,6 @@ const PROJECTS = [
     links: [
       { label: "GitHub", url: "https://github.com/yourusername/yourrepo" },
       { label: "Live Demo", url: "https://your-site.example.com" }
-    ]
-  },
-  {
-    slug: "apk-analyzer",
-    title: "APK Analyzer (Static Risk Scoring)",
-    subtitle: "Cross platform tooling for APK inspection",
-    category: "tooling",
-    year: "2025",
-    description:
-      "A tool that analyzes APKs and summarizes risk signals. Includes a desktop UI and automated analysis pipeline.",
-    stack: ["C++", "SDL", "Python", "Apktool"],
-    highlights: [
-      "Built UI components for reports and risk cards.",
-      "Integrated analysis steps into a repeatable workflow.",
-      "Produced readable outputs for non technical users."
-    ],
-    links: [
-      { label: "GitHub", url: "https://github.com/yourusername/yourrepo" }
-    ]
-  },
-  {
-    slug: "data-modeling-projects",
-    title: "Data Modeling Projects",
-    subtitle: "Schemas, constraints, and validation utilities",
-    category: "backend",
-    year: "2024",
-    description:
-      "A set of coursework and utilities around ER modeling, normalization, and consistency checking.",
-    stack: ["SQL", "Python", "ERD"],
-    highlights: [
-      "Created consistent sample datasets and validation rules.",
-      "Automated checks for referential integrity edge cases.",
-      "Documented assumptions and tradeoffs."
-    ],
-    links: [
-      { label: "Repository", url: "https://github.com/yourusername/yourrepo" }
-    ]
-  },
-  {
-    slug: "surface-coatings-and-catalysts",
-    title: "Surface Coatings and Catalysts Work",
-    subtitle: "Research portfolio highlights",
-    category: "research",
-    year: "2023–2025",
-    description:
-      "Selected research work including experimental design, characterization workflows, and analysis pipelines.",
-    stack: ["Data Analysis", "Instrumentation", "Electrochem"],
-    highlights: [
-      "Built repeatable workflows for sample processing and analysis.",
-      "Produced publication quality plots and data summaries.",
-      "Maintained detailed documentation and reproducibility."
-    ],
-    links: [
-      { label: "Writeup", url: "https://your-site.example.com/research" }
     ]
   }
 ];
@@ -133,7 +79,8 @@ function tagForCategory(cat) {
     web: "Web",
     backend: "Backend",
     tooling: "Tooling",
-    research: "Research"
+    research: "Research",
+    game: "Game"
   };
   return map[cat] || "Project";
 }
