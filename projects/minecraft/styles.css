@@ -10,16 +10,34 @@
 }
 
 *{ box-sizing: border-box; }
-html,body{ height: 100%; }
+html, body{ height: 100%; }
+html{ background: var(--bg); }
+
 body{
   margin: 0;
+  min-height: 100vh;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(900px 500px at 85% 0%, rgba(32,227,178,0.16), transparent 60%),
-    radial-gradient(900px 500px at 10% 10%, rgba(124,92,255,0.14), transparent 60%),
-    var(--bg);
   line-height: 1.55;
+  background: transparent;
+}
+
+/* Background is handled by the animated noise canvas */
+body::before{ display: none !important; }
+
+#bgNoise{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep all content above the background canvas */
+body > :not(#bgNoise){
+  position: relative;
+  z-index: 1;
 }
 
 a{ color: inherit; }

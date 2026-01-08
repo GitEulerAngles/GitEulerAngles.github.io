@@ -16,7 +16,7 @@ const PROJECTS = [
     category: "game",
     year: "2025",
     description:
-      "An independently developed game in the style of Minecraft the utilizes chunk optimization, OpenGL, and various game development techniques.",
+      "An independently developed game in the style of Minecraft that utilizes chunk optimization, OpenGL, and various game development techniques.",
     stack: ["C++", "OpenGL"],
     highlights: [
       "Built responsive UI with clear navigation and filtering.",

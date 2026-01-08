@@ -19,11 +19,33 @@ html,body{ height: 100%; }
 body{
   margin: 0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: radial-gradient(1200px 700px at 15% 10%, rgba(124,92,255,0.24), transparent 60%),
-              radial-gradient(900px 600px at 85% 15%, rgba(32,227,178,0.16), transparent 55%),
-              var(--bg);
+
+  /* Base color */
+  background-color: var(--bg);
+
+  /* Put YOUR image first, then your existing glow gradients on top */
+  background-image:
+    url("images/bg.jpg"),
+    radial-gradient(1200px 700px at 15% 10%, rgba(124,92,255,0.24), transparent 60%),
+    radial-gradient(900px 600px at 85% 15%, rgba(32,227,178,0.16), transparent 55%);
+
+  /* Stop tiling */
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  /* Make the photo fill the screen */
+  background-size: cover, auto, auto;
+
+  /* Center the photo, keep your glow positions */
+  background-position: center, 15% 10%, 85% 15%;
+
+  /* Optional: keeps the image stable while scrolling on desktop */
+  background-attachment: fixed, fixed, fixed;
+
   color: var(--text);
   line-height: 1.55;
+}
+@media (max-width: 900px){
+  body{ background-attachment: scroll, scroll, scroll; } /* smoother on mobile */
 }
 
 a{ color: inherit; }
@@ -134,9 +156,10 @@ code{
 }
 
 .hero{
-  position: relative;
-  padding: 58px 0 26px;
-  overflow: hidden;
+  background-image: url("images/hero.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .hero-bg{
   position: absolute;
