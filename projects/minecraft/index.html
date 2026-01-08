@@ -13,12 +13,10 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body data-project-key="minecraft-project" data-youtube="">
-  <header class="bar">
+<body data-project-key="minecraft-project">  <header class="bar">
     <div class="wrap">
       <a class="back" href="../../index.html#projects">Back to projects</a>
       <div class="title" id="projectTitle">Minecraft Project</div>
-      <a class="btn primary small" id="youtubeTop" href="#video">YouTube</a>
     </div>
   </header>
 
@@ -26,34 +24,26 @@
     <section class="hero">
       <h1 id="headline">Minecraft Project</h1>
       <p class="muted" id="lede">
-        A short, skimmable description of what this world, build, or mod is about.
+        A C++ voxel sandbox prototype that explores chunked world streaming, mesh generation, and real time OpenGL rendering, built as a foundation for a Minecraft style engine.
       </p>
       <div class="tags" aria-label="Project tags">
-        <span class="tag">Java Edition</span>
-        <span class="tag">Survival</span>
-        <span class="tag">Redstone</span>
-        <span class="tag">Building</span>
+        <span class="tag">C++</span>
+        <span class="tag">GLFW</span>
+        <span class="tag">GLEW</span>
+        <span class="tag">GLM</span>
       </div>
     </section>
 
     <section class="card" id="video">
       <div class="card-head">
         <h2>Video</h2>
-        <div class="video-controls" aria-label="YouTube link">
-          <label class="sr-only" for="ytInput">YouTube link</label>
-          <input id="ytInput" type="url" placeholder="Paste a YouTube link (watch, youtu.be, shorts)…" inputmode="url" autocomplete="off" />
-          <button class="btn" id="ytApply" type="button">Load</button>
-        </div>
       </div>
 
       <div class="video-shell" id="videoShell" role="group" aria-label="Embedded video">
-        <div class="video-placeholder" id="videoPlaceholder">
-          <div class="ph-title">Add your YouTube demo</div>
-          <div class="ph-sub">Paste a link above and hit Load. This will update the button in the header too.</div>
-        </div>
         <iframe
           id="ytFrame"
           class="video-frame"
+          src="https://www.youtube-nocookie.com/embed/QWHR6ZsEq7o"
           title="YouTube video"
           loading="lazy"
           referrerpolicy="strict-origin-when-cross-origin"
@@ -61,34 +51,27 @@
           allowfullscreen
         ></iframe>
       </div>
-
-      <p class="muted small">
-        Tip: if you want it hard-coded instead of using the input, set <code>data-youtube</code> on the <code>&lt;body&gt;</code>.
-      </p>
     </section>
 
     <section class="card" id="gallery">
       <h2>Screenshots</h2>
-      <p class="muted">
-        Drop screenshots in an <code>assets/</code> folder next to this page, then update the filenames below.
-      </p>
 
       <div class="gallery" aria-label="Screenshot gallery">
-        <a class="shot" href="assets/shot-1.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/shot-1.jpg" alt="Screenshot 1" />
-          <div class="shot-ph">assets/shot-1.jpg</div>
+        <a class="shot" href="assets/shot-1.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-1.png" alt="Screenshot 1" />
+          <div class="shot-ph">assets/shot-1.png</div>
         </a>
-        <a class="shot" href="assets/shot-2.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/shot-2.jpg" alt="Screenshot 2" />
-          <div class="shot-ph">assets/shot-2.jpg</div>
+        <a class="shot" href="assets/shot-2.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-2.png" alt="Screenshot 2" />
+          <div class="shot-ph">assets/shot-2.png</div>
         </a>
-        <a class="shot" href="assets/shot-3.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/shot-3.jpg" alt="Screenshot 3" />
-          <div class="shot-ph">assets/shot-3.jpg</div>
+        <a class="shot" href="assets/shot-3.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-3.png" alt="Screenshot 3" />
+          <div class="shot-ph">assets/shot-3.png</div>
         </a>
-        <a class="shot" href="assets/shot-4.jpg" target="_blank" rel="noreferrer">
-          <img src="assets/shot-4.jpg" alt="Screenshot 4" />
-          <div class="shot-ph">assets/shot-4.jpg</div>
+        <a class="shot" href="assets/shot-4.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-4.png" alt="Screenshot 4" />
+          <div class="shot-ph">assets/shot-4.png</div>
         </a>
       </div>
     </section>
@@ -98,34 +81,84 @@
 
       <div class="prose">
         <p>
-          Use this section to explain what you built, why you built it, and what you are proud of. Keep it simple and
-          scannable.
+          I built a Minecraft-style voxel world prototype in C++ using OpenGL. The goal was to learn the full pipeline for a
+          3D sandbox: chunked world data, mesh generation, a texture atlas, and a smooth realtime render loop, while keeping the
+          code structured enough to grow into a real game.
         </p>
 
         <h3>What it is</h3>
         <ul>
-          <li>Type: world, build, redstone contraption, datapack, mod, or server</li>
-          <li>Version: 1.xx.x</li>
-          <li>Single-player or multiplayer: (optional)</li>
+          <li><strong>Type:</strong> voxel sandbox prototype (Minecraft-style renderer + chunked world streaming)</li>
+          <li><strong>Tech:</strong> C++, OpenGL (GLFW/GLEW), GLM, stb_image, GLSL shaders</li>
+          <li><strong>World format:</strong> chunked blocks (16 × 16 × 64 per chunk)</li>
+          <li><strong>Single-player:</strong> yes</li>
         </ul>
 
         <h3>Highlights</h3>
         <ul>
-          <li>One cool feature or idea</li>
-          <li>Another cool feature or idea</li>
-          <li>Any constraints you solved around scale, timing, or resources</li>
+          <li>
+            <strong>Background world streaming:</strong> a dedicated generation thread populates chunks around the player so the
+            render loop stays responsive.
+          </li>
+          <li>
+            <strong>Chunk-based rendering:</strong> chunks are tracked in hash maps (data vs. renderer), and missing renderers
+            are built progressively outward from the player.
+          </li>
+          <li>
+            <strong>Texture atlas workflow:</strong> blocks use atlas UVs, sampled with nearest filtering for a crisp
+            pixel-art look.
+          </li>
+          <li>
+            <strong>Rendering efficiency foundations:</strong> each block tracks active faces, enabling face culling so only
+            visible sides are pushed into the chunk mesh.
+          </li>
+          <li>
+            <strong>Camera feel:</strong> mouse-look updates yaw/pitch and direction vectors, plus a visibility test that can be
+            used for chunk culling.
+          </li>
         </ul>
 
         <h3>How it works</h3>
         <p>
-          Explain the core mechanics in plain language. If it is redstone, talk through the signal flow. If it is a build,
-          describe layout choices and materials. If it is a mod, describe gameplay changes.
+          The program creates a window and OpenGL context, then runs two loops: the main thread handles input, updates, and
+          rendering; a second thread handles world generation. The generation thread repeatedly:
+        </p>
+        <ul>
+          <li>
+            Computes the player’s current chunk using the camera position (x/z divided by 16, floored).
+          </li>
+          <li>
+            Ensures a buffer of chunk data exists around the player (within a render-distance radius).
+          </li>
+          <li>
+            Builds exactly one missing chunk renderer at a time, scanning in an expanding ring around the player so nearby
+            chunks appear first.
+          </li>
+        </ul>
+        <p>
+          Each chunk stores block types (air, grass, dirt, sand). When a chunk renderer is created, it generates vertex and
+          index buffers for the visible faces, assigns atlas UVs per face, and draws with a simple shader that samples the atlas
+          texture.
         </p>
 
         <h3>What I would improve next</h3>
         <ul>
-          <li>Performance or usability improvements</li>
-          <li>More polish, better documentation, or expanded features</li>
+          <li>
+            <strong>Thread safety:</strong> protect shared maps (chunk data and renderers) with proper synchronization to avoid
+            race conditions as the project scales.
+          </li>
+          <li>
+            <strong>Chunk unloading:</strong> add an LRU-style cache so far-away chunks are unloaded from RAM and GPU memory.
+          </li>
+          <li>
+            <strong>Meshing upgrades:</strong> implement greedy meshing to dramatically reduce triangle count and boost FPS.
+          </li>
+          <li>
+            <strong>Gameplay loop:</strong> add block breaking/placing, simple physics/collision, and saving/loading the world.
+          </li>
+          <li>
+            <strong>Visual polish:</strong> lighting (even basic sunlight + ambient), fog, and better frustum/occlusion culling.
+          </li>
         </ul>
       </div>
     </section>
@@ -133,11 +166,8 @@
     <section class="card" id="links">
       <h2>Links</h2>
       <div class="actions">
-        <a class="btn primary" href="#" target="_blank" rel="noreferrer">World download</a>
-        <a class="btn" href="#" target="_blank" rel="noreferrer">Resource pack</a>
-        <a class="btn" href="#" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="https://github.com/GitEulerAngles/Minecraft" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-      <p class="muted small">Replace the <code>#</code> links above with your real URLs.</p>
     </section>
   </main>
 
