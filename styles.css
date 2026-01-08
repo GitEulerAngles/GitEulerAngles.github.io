@@ -39,7 +39,7 @@ body{
   background-position: center, 15% 10%, 85% 15%;
 
   /* Optional: keeps the image stable while scrolling on desktop */
-  background-attachment: fixed, fixed, fixed;
+  background-attachment: scroll, scroll, scroll;
 
   color: var(--text);
   line-height: 1.55;
@@ -153,23 +153,6 @@ code{
 .btn-primary:hover{ border-color: rgba(124,92,255,0.75); }
 .btn-ghost{
   background: transparent;
-}
-
-.hero{
-  background-image: url("images/hero.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.hero-bg{
-  position: absolute;
-  inset: -50px -60px auto -60px;
-  height: 420px;
-  background: radial-gradient(600px 220px at 20% 40%, rgba(124,92,255,0.25), transparent 65%),
-              radial-gradient(460px 220px at 70% 55%, rgba(32,227,178,0.18), transparent 60%);
-  filter: blur(6px);
-  pointer-events: none;
-  opacity: 0.9;
 }
 
 .hero-grid{

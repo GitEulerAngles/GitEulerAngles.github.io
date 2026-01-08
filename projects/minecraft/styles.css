@@ -34,6 +34,12 @@ body::before{ display: none !important; }
   pointer-events: none;
 }
 
+body > *:not(#bgNoise){
+  position: relative;
+  z-index: 1;
+}
+
+
 /* Keep all content above the background canvas */
 body > :not(#bgNoise){
   position: relative;

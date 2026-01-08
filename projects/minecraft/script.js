@@ -53,6 +53,16 @@ document.querySelectorAll(".shot").forEach((shot) => {
   });
 });
 
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  if (y !== lastScrollY) {
+    lastScrollY = y;
+    needsRedraw = true;
+  }
+}, { passive: true });
+
+const SEED = Math.floor(Math.random() * 1e9);
+
 // --- Animated Perlin-style background (optimized) ---
 (() => {
   const canvas = document.getElementById("bgNoise");
@@ -62,12 +72,12 @@ document.querySelectorAll(".shot").forEach((shot) => {
   if (!ctx) return;
 
   // Target FPS for background animation
-  const FPS = 30;
+  const FPS = 10;
   const FRAME_MS = 1000 / FPS;
 
   // Hard cap internal render resolution (smaller = faster)
-  const MAX_W = 520;
-  const MAX_H = 320;
+  const MAX_W = 260;
+  const MAX_H = 160;
 
   function mulberry32(seed) {
     return function () {
@@ -143,7 +153,7 @@ document.querySelectorAll(".shot").forEach((shot) => {
     return value;
   }
 
-  const perm = makePerm(1337);
+  const perm = makePerm(SEED);
 
   // Buffers
   let img = null;
@@ -154,18 +164,17 @@ document.querySelectorAll(".shot").forEach((shot) => {
   let baseY = null;
 
   // Colors
-  const base = [8, 10, 18];
-  const blue = [60, 160, 255];
-  const purple = [140, 95, 255];
+  const base   = [7, 9, 13];     // near-black neutral
+  const light  = [26, 30, 38];   // subtle lighter gray
 
   // Visual controls
-  const strength = 0.80;     // overall intensity
+  const strength = 0.65;     // overall intensity
   const cutoff = 0.70;       // higher = more black
   const gamma = 2.1;         // higher = sharper peaks
 
   // Motion controls
   const scale = 0.0006;       // smaller = bigger blobs
-  const speed = 0.02;        // lower = slower drift
+  const speed = 0.006;        // lower = slower drift
   const driftX = 0.22;
   const driftY = 0.16;
 
@@ -180,13 +189,16 @@ document.querySelectorAll(".shot").forEach((shot) => {
     return t * t * (3 - 2 * t);
   };
 
+let pxScale = 1;
+
   function resize() {
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     const targetW = Math.floor(window.innerWidth * dpr);
     const targetH = Math.floor(window.innerHeight * dpr);
 
-    // Scale down to fit within caps
     const s = Math.min(1, MAX_W / targetW, MAX_H / targetH);
+
+    pxScale = dpr * s;
 
     canvas.width = Math.max(2, Math.floor(targetW * s));
     canvas.height = Math.max(2, Math.floor(targetH * s));
@@ -196,25 +208,28 @@ document.querySelectorAll(".shot").forEach((shot) => {
     img = ctx.createImageData(canvas.width, canvas.height);
     data = img.data;
 
-    // Precompute base coords
     baseX = new Float32Array(canvas.width);
     baseY = new Float32Array(canvas.height);
     for (let x = 0; x < canvas.width; x++) baseX[x] = x * scale;
     for (let y = 0; y < canvas.height; y++) baseY[y] = y * scale;
+
+    drawFrame(); // draw once, no animation needed if you want static
   }
 
-  let lastTS = 0;
-  let accMS = 0;
-  let t = 0;
+  let needsRedraw = true;
+  let lastScrollY = window.scrollY;
 
   function drawFrame() {
+    const scrollInternal = window.scrollY * pxScale;
+    const scrollNoise = (window.scrollY * pxScale) * scale;
+
     const w = canvas.width;
     const h = canvas.height;
 
     let idx = 0;
     for (let y = 0; y < h; y++) {
-      const ny = baseY[y] + t * driftY;
-      const hy = baseY[y] + t * hueDY;
+      const ny = baseY[y] + scrollNoise + t * driftY;
+      const hy = baseY[y] + scrollNoise + t * hueDY;
 
       for (let x = 0; x < w; x++) {
         const nx = baseX[x] + t * driftX;
@@ -227,13 +242,14 @@ document.querySelectorAll(".shot").forEach((shot) => {
 
         // Hue field controls blue vs purple
         const hN = fbm(perm, hx + 100.0, hy - 50.0);
-        const rr = lerp(blue[0], purple[0], hN);
-        const gg = lerp(blue[1], purple[1], hN);
-        const bb = lerp(blue[2], purple[2], hN);
+        const rr = lerp(base[0], light[0], hN);
+        const gg = lerp(base[1], light[1], hN);
+        const bb = lerp(base[2], light[2], hN);
 
-        const r = base[0] + rr * (m * strength);
-        const g = base[1] + gg * (m * strength);
-        const b = base[2] + bb * (m * strength);
+        const r = lerp(base[0], rr, m * strength);
+        const g = lerp(base[1], gg, m * strength);
+        const b = lerp(base[2], bb, m * strength);
+
 
         data[idx++] = clamp255(r);
         data[idx++] = clamp255(g);
@@ -245,6 +261,12 @@ document.querySelectorAll(".shot").forEach((shot) => {
     ctx.putImageData(img, 0, 0);
   }
 
+  let lastTS = 0;
+  let accMS = 0;
+  let t = 0;
+
+  let scrollBoostUntil = 0; // timestamp in ms
+
   function tick(ts) {
     if (!img) return;
 
@@ -252,13 +274,27 @@ document.querySelectorAll(".shot").forEach((shot) => {
     const dtMS = Math.min(80, ts - lastTS);
     lastTS = ts;
 
-    accMS += dtMS;
+    // Detect scrolling every frame
+    const y = window.scrollY;
+    if (y !== lastScrollY) {
+      lastScrollY = y;
+      scrollBoostUntil = ts + 140; // keep 60fps for a short tail after last scroll change
+    }
 
-    // Only redraw at FPS (cuts CPU a lot)
-    if (accMS >= FRAME_MS) {
-      t += (accMS / 1000) * speed;
-      accMS = 0;
+    const scrollingNow = ts < scrollBoostUntil;
+
+    if (scrollingNow) {
+      // 60fps mode while scrolling
+      t += (dtMS / 1000) * speed;
       drawFrame();
+    } else {
+      // Normal capped FPS mode when idle
+      accMS += dtMS;
+      if (accMS >= FRAME_MS) {
+        t += (accMS / 1000) * speed;
+        accMS = 0;
+        drawFrame();
+      }
     }
 
     requestAnimationFrame(tick);
