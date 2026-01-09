@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mario platformer project page" />
+  <title>Mario Project | Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-project-key="mario-project">
+  <canvas id="bgNoise" aria-hidden="true"></canvas>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="back" href="../../index.html#projects">Back to projects</a>
+      <div class="title" id="projectTitle">Mario Project</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 id="headline">Mario Project</h1>
+      <p class="muted" id="lede">
+        A 2D Mario-style platformer prototype focused on tight movement, tile-based levels, collision and physics, and a simple game loop you can extend into a full game. Perfect example of high-level programming using low-level programming language and APIs.
+      </p>
+      <div class="tags" aria-label="Project tags">
+        <span class="tag">C</span>
+        <span class="tag">Win32 API</span>
+        <span class="tag">FreeImage</span>
+      </div>
+    </section>
+
+    <section class="card" id="video">
+      <div class="card-head">
+        <h2>Video</h2>
+      </div>
+
+      <div class="video-shell" id="videoShell" role="group" aria-label="Embedded video">
+        <iframe
+          id="ytFrame"
+          class="video-frame"
+          src="https://www.youtube-nocookie.com/embed/NyW28zCKk5Q"
+          title="YouTube video"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="card" id="gallery">
+      <h2>Screenshots</h2>
+
+      <div class="gallery" aria-label="Screenshot gallery">
+        <a class="shot" href="assets/shot-1.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-1.png" alt="Gameplay screenshot 1" />
+          <div class="shot-ph">assets/shot-1.png</div>
+        </a>
+        <a class="shot" href="assets/shot-2.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-2.png" alt="Gameplay screenshot 2" />
+          <div class="shot-ph">assets/shot-2.png</div>
+        </a>
+        <a class="shot" href="assets/shot-3.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-3.png" alt="Gameplay screenshot 3" />
+          <div class="shot-ph">assets/shot-3.png</div>
+        </a>
+        <a class="shot" href="assets/shot-4.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-4.png" alt="Gameplay screenshot 4" />
+          <div class="shot-ph">assets/shot-4.png</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="card" id="writeup">
+      <h2>Project write-up</h2>
+
+      <div class="prose">
+        <p>
+          I built a Mario-style 2D platformer prototype to learn the fundamentals behind classic side-scrollers:
+          tile-based level representation, player movement and jumping, collision resolution, and a clean update/render loop.
+          The focus is on a solid foundation that is easy to expand with enemies, items, and multiple levels.
+        </p>
+
+        <h3>What it is</h3>
+        <ul>
+          <li><strong>Type:</strong> 2D platformer prototype (Mario-style movement + tile-based levels)</li>
+          <li><strong>Core systems:</strong> input, animation/sprites, collision, simple physics, game loop</li>
+          <li><strong>Level format:</strong> grid/tilemap (easy to author and swap levels)</li>
+          <li><strong>Single-player:</strong> yes</li>
+        </ul>
+
+        <h3>Highlights</h3>
+        <ul>
+          <li>
+            <strong>Tile-based collision:</strong> solid tiles resolve against the player to support clean ground movement,
+            wall hits, and reliable landing.
+          </li>
+          <li>
+            <strong>Jump feel:</strong> tuned gravity and jump impulse for responsive platforming.
+          </li>
+          <li>
+            <strong>Sprite pipeline:</strong> structured sprite rendering so characters, tiles, and UI can share a consistent flow.
+          </li>
+          <li>
+            <strong>Expandable architecture:</strong> components are separated so adding enemies, collectibles, or powerups is straightforward.
+          </li>
+        </ul>
+
+        <h3>How it works</h3>
+        <p>
+          The game runs a classic fixed-step loop: read input, update simulation, resolve collisions, then render.
+          The world is represented as a 2D grid of tiles. Each frame, the player’s position and velocity are updated,
+          then collisions are checked against nearby tiles and corrected so the player cannot pass through solid blocks.
+        </p>
+        <ul>
+          <li>Load a tilemap into memory (numbers map to tiles like air, ground, blocks, etc.).</li>
+          <li>Update player velocity from input (left/right), then apply gravity.</li>
+          <li>Move the player, resolve collisions on X and Y, and set grounded state when landing.</li>
+          <li>Render tiles first, then player and entities, then any UI.</li>
+        </ul>
+
+        <h3>What I would improve next</h3>
+        <ul>
+          <li>
+            <strong>More entities:</strong> enemies with simple AI, stomp detection, and projectiles.
+          </li>
+          <li>
+            <strong>Level features:</strong> question blocks, coins, moving platforms, and checkpoints.
+          </li>
+          <li>
+            <strong>Camera:</strong> smoother follow camera and better bounds handling per level.
+          </li>
+          <li>
+            <strong>Polish:</strong> sound effects, particles, and small animation touches for impact.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" id="links">
+      <h2>Links</h2>
+      <div class="actions">
+        <!-- TODO: update this repo URL for the Mario project -->
+        <a class="btn" href="https://github.com/GitEulerAngles/MarioProject" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">© <span id="year"></span></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

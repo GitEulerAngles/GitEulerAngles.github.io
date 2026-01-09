@@ -27,6 +27,25 @@ const PROJECTS = [
       { label: "GitHub", url: "https://github.com/yourusername/yourrepo" },
       { label: "Live Demo", url: "https://your-site.example.com" }
     ]
+  },
+    {
+    slug: "mario",
+    title: "Mario",
+    subtitle: "Independently developed a self-made Minecraft clone using OpenGL and C++",
+    category: "game",
+    year: "2025",
+    description:
+      "An independently developed game in the style of Minecraft that utilizes chunk optimization, OpenGL, and various game development techniques.",
+    stack: ["C++", "Window32 API", "FreeImage"],
+    highlights: [
+      "Built responsive UI with clear navigation and filtering.",
+      "Designed API endpoints and data models for request workflows.",
+      "Implemented export/reporting features for admins."
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/yourusername/yourrepo" },
+      { label: "Live Demo", url: "https://your-site.example.com" }
+    ]
   }
 ];
 
