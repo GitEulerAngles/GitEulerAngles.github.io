@@ -28,15 +28,15 @@ const PROJECTS = [
       { label: "Live Demo", url: "https://your-site.example.com" }
     ]
   },
-    {
+  {
     slug: "mario",
     title: "Mario",
     subtitle: "Independently developed a self-made Minecraft clone using OpenGL and C++",
     category: "game",
     year: "2025",
     description:
-      "An independently developed game in the style of Minecraft that utilizes chunk optimization, OpenGL, and various game development techniques.",
-    stack: ["C++", "Window32 API", "FreeImage"],
+      "Created a 2D Mario-style platformer prototype with tight movement, tile-based levels, collision, and physics using C and the Win32 API. Features an expandable architecture for new gameplay elements.",
+    stack: ["C", "Window32 API", "FreeImage"],
     highlights: [
       "Built responsive UI with clear navigation and filtering.",
       "Designed API endpoints and data models for request workflows.",
@@ -45,6 +45,24 @@ const PROJECTS = [
     links: [
       { label: "GitHub", url: "https://github.com/yourusername/yourrepo" },
       { label: "Live Demo", url: "https://your-site.example.com" }
+    ]
+  },
+  {
+    slug: "nspire",
+    title: "NSPIRE",
+    subtitle: "Full-stack web application with clean frontend paired with structured backend and service layer",
+    category: "web",
+    year: "2024",
+    description:
+      "A collaborative full-stack web application developed by a team of six, featuring HTML/CSS/TypeScript frontend, Node.js backend, and modular service architecture with search-driven interaction and clear page flow.",
+    stack: ["HTML", "CSS", "TypeScript", "Node.js"],
+    highlights: [
+      "Team-based architecture with divided responsibilities across frontend, backend, and services.",
+      "Service-layer design isolating data logic from routing and presentation.",
+      "Search-driven interaction with seamless navigation from results to detailed views."
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/cseseniordesign/NSPIRE" }
     ]
   }
 ];

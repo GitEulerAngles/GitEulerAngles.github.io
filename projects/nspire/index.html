@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="NSPIRE full-stack web application project page" />
+  <title>NSPIRE Project | Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-project-key="nspire-project">
+  <canvas id="bgNoise" aria-hidden="true"></canvas>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="back" href="../../index.html#projects">Back to projects</a>
+      <div class="title" id="projectTitle">NSPIRE Project</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 id="headline">NSPIRE</h1>
+      <p class="muted" id="lede">
+        A full-stack web application developed collaboratively by me, Jacob, Noah, Cameron, Lyndi, and Maya. The project explores how a clean frontend experience can be paired with a structured backend and service layer, with an emphasis on teamwork, clear ownership boundaries, and scalable architecture.
+      </p>
+      <div class="tags" aria-label="Project tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </section>
+
+    <section class="card" id="video">
+      <div class="card-head">
+        <h2>Video</h2>
+      </div>
+
+      <div class="video-shell" id="videoShell" role="group" aria-label="Embedded video">
+        <iframe
+          id="ytFrame"
+          class="video-frame"
+          src="https://www.youtube-nocookie.com/embed/JUVi7Y-D6uA"
+          title="YouTube video"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="card" id="gallery">
+      <h2>Screenshots</h2>
+
+      <div class="gallery" aria-label="Screenshot gallery">
+        <a class="shot" href="assets/shot-1.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-1.png" alt="Gameplay screenshot 1" />
+          <div class="shot-ph">assets/shot-1.png</div>
+        </a>
+        <a class="shot" href="assets/shot-2.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-2.png" alt="Gameplay screenshot 2" />
+          <div class="shot-ph">assets/shot-2.png</div>
+        </a>
+        <a class="shot" href="assets/shot-3.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-3.png" alt="Gameplay screenshot 3" />
+          <div class="shot-ph">assets/shot-3.png</div>
+        </a>
+        <a class="shot" href="assets/shot-4.png" target="_blank" rel="noreferrer">
+          <img src="assets/shot-4.png" alt="Gameplay screenshot 4" />
+          <div class="shot-ph">assets/shot-4.png</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="card" id="writeup">
+      <h2>Project write-up</h2>
+
+      <div class="prose">
+        <p>
+          NSPIRE is a full-stack web application developed collaboratively by me, Jacob, Noah, Cameron, Lyndi, and Maya.
+          The project explores how a clean frontend experience can be paired with a structured backend and service layer,
+          with an emphasis on teamwork, clear ownership boundaries, and scalable architecture.
+        </p>
+        <p>
+          Our goal was to create a strong technical foundation that supports real user interaction while remaining easy to
+          extend with richer data, improved search functionality, and new features.
+        </p>
+
+        <h3>What it is</h3>
+        <ul>
+          <li><strong>Type:</strong> collaborative full-stack web application</li>
+          <li><strong>Frontend:</strong> HTML, CSS, TypeScript, client-side rendering and navigation</li>
+          <li><strong>Backend:</strong> Node.js with TypeScript, modular services, server-side routing</li>
+          <li><strong>Core systems:</strong> search, detail views, service-driven data access, request handling</li>
+          <li><strong>Multi-page experience:</strong> landing, search, details, and informational pages</li>
+        </ul>
+
+        <h3>Highlights</h3>
+        <ul>
+          <li>
+            <strong>Team-based architecture:</strong> responsibilities were divided across frontend, backend, and services
+            to enable parallel development.
+          </li>
+          <li>
+            <strong>Clear page flow:</strong> dedicated landing, search, and detail pages designed for intuitive navigation.
+          </li>
+          <li>
+            <strong>Service-layer design:</strong> reusable services isolate data logic from routing and presentation.
+          </li>
+          <li>
+            <strong>Search-driven interaction:</strong> users can query data and move seamlessly from results to detailed views.
+          </li>
+        </ul>
+
+        <h3>How it works</h3>
+        <p>
+          The application is organized into client-facing pages and a backend server, allowing the team to work independently
+          across layers without tight coupling.
+        </p>
+        <ul>
+          <li>The server initializes routes and exposes endpoints for search and detail requests.</li>
+          <li>Service modules encapsulate data retrieval and business logic.</li>
+          <li>The search page sends queries to backend endpoints and dynamically renders results.</li>
+          <li>Selecting a result routes the user to a details page populated with server-provided data.</li>
+          <li>Static informational pages provide context without depending on application state.</li>
+        </ul>
+        <p>
+          This separation kept the codebase readable and allowed each team member to contribute without blocking others.
+        </p>
+
+        <h3>What we would improve next</h3>
+        <ul>
+          <li>
+            <strong>Richer data sources:</strong> connect to external APIs or a database instead of static or mock data.
+          </li>
+          <li>
+            <strong>Client-side state management:</strong> improve transitions and shared state between pages.
+          </li>
+          <li>
+            <strong>UI polish:</strong> refine layout, spacing, and interaction feedback.
+          </li>
+          <li>
+            <strong>Performance:</strong> introduce caching and pagination for larger datasets.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" id="links">
+      <h2>Links</h2>
+      <div class="actions">
+        <a class="btn" href="https://github.com/cseseniordesign/NSPIRE" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">© <span id="year"></span></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
