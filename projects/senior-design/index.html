@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Senior Design project page" />
+	<title>Senior Design | Project</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-project-key="senior-design-project">
+	<canvas id="bgNoise" aria-hidden="true"></canvas>
+
+	<header class="bar">
+		<div class="wrap">
+			<a class="back" href="../../index.html#projects">Back to projects</a>
+			<div class="title" id="projectTitle">Senior Design</div>
+		</div>
+	</header>
+
+	<main class="wrap">
+		<section class="hero">
+			<h1 id="headline">Senior Design</h1>
+			<p class="muted" id="lede">
+				A project showcase for the Senior Design work. Click any screenshot below to open the full-size image in a dedicated, scrollable view.
+			</p>
+			<div class="tags" aria-label="Project tags">
+				<span class="tag">Senior Design</span>
+				<span class="tag">Project Showcase</span>
+			</div>
+		</section>
+
+		<section class="card" id="gallery">
+			<h2>Screenshots</h2>
+
+			<div class="gallery" aria-label="Screenshot gallery">
+				<a class="shot" href="view.html?img=assets/Landing%20page.jpg&title=Landing%20Page">
+					<img src="assets/Landing page.jpg" alt="Landing page screenshot" />
+					<div class="shot-ph">assets/Landing page.jpg</div>
+				</a>
+
+				<a class="shot" href="view.html?img=assets/2023-2024.png&title=2023-2024">
+					<img src="assets/2023-2024.png" alt="2023-2024 screenshot" />
+					<div class="shot-ph">assets/2023-2024.png</div>
+				</a>
+
+				<a class="shot" href="view.html?img=assets/Coaches.png&title=Coaches">
+					<img src="assets/Coaches.png" alt="Coaches screenshot" />
+					<div class="shot-ph">assets/Coaches.png</div>
+				</a>
+
+				<a class="shot" href="view.html?img=assets/Sponsors.png&title=Sponsors">
+					<img src="assets/Sponsors.png" alt="Sponsors screenshot" />
+					<div class="shot-ph">assets/Sponsors.png</div>
+				</a>
+
+				<a class="shot" href="view.html?img=assets/Videos.png&title=Videos">
+					<img src="assets/Videos.png" alt="Videos screenshot" />
+					<div class="shot-ph">assets/Videos.png</div>
+				</a>
+			</div>
+		</section>
+
+    <section class="card" id="writeup">
+      <h2>Project write-up</h2>
+
+      <div class="prose">
+        <p>
+          This Senior Design project is a website built to present team and program information in a clear, easy-to-navigate format.
+          It was developed by me as a polished deliverable that could be used as a real informational site.
+        </p>
+        <p>
+          My goal was to create a clean user experience for visitors by organizing content into dedicated pages and making
+          key sections easy to find at a glance.
+        </p>
+
+        <h3>What it is</h3>
+        <ul>
+          <li><strong>Type:</strong> individual website development project</li>
+          <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+          <li><strong>Core pages:</strong> landing page, season/year information, coaches, sponsors, and videos</li>
+          <li><strong>Purpose:</strong> communicate program details in a structured, visual format</li>
+          <li><strong>Experience:</strong> multi-page navigation with consistent layout and branding</li>
+        </ul>
+
+        <h3>Highlights</h3>
+        <ul>
+          <li>
+            <strong>Content-first design:</strong> each page was created around a specific audience need, making navigation
+            straightforward for new visitors.
+          </li>
+          <li>
+            <strong>Clear page flow:</strong> users can move from the landing page to focused sections without confusion.
+          </li>
+          <li>
+            <strong>Consistent visual structure:</strong> shared styling and page patterns keep the site cohesive.
+          </li>
+          <li>
+            <strong>Individual effort:</strong> all development tasks were handled by me, including layout, content, styling, and testing.
+          </li>
+        </ul>
+
+        <h3>How it works</h3>
+        <p>
+          The site is organized into dedicated pages that present specific content areas while keeping navigation and styling
+          consistent throughout.
+        </p>
+        <ul>
+          <li>The landing page introduces the project and provides quick access to the main sections.</li>
+          <li>Season/year content organizes information by timeframe for easier browsing.</li>
+          <li>The coaches page highlights staff and leadership roles.</li>
+          <li>The sponsors page recognizes supporting organizations and partners.</li>
+          <li>The videos page provides media content to showcase activity and engagement.</li>
+        </ul>
+        <p>
+          This structure kept development manageable and allowed me to work independently while maintaining a
+          consistent final product.
+        </p>
+
+        <h3>What I would improve next</h3>
+        <ul>
+          <li>
+            <strong>Mobile optimization:</strong> further refine spacing and layout behavior across all device sizes.
+          </li>
+          <li>
+            <strong>Content management:</strong> make updates easier with a lightweight CMS or structured data source.
+          </li>
+          <li>
+            <strong>Accessibility:</strong> expand keyboard support, contrast checks, and semantic labels.
+          </li>
+          <li>
+            <strong>Media optimization:</strong> compress and optimize images/videos for faster page loads.
+          </li>
+        </ul>
+      </div>
+    </section>
+	</main>
+
+	<footer class="foot">
+		<div class="wrap">© <span id="year"></span></div>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>

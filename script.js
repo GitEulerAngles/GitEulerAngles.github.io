@@ -64,6 +64,24 @@ const PROJECTS = [
     links: [
       { label: "GitHub", url: "https://github.com/cseseniordesign/NSPIRE" }
     ]
+  },
+  {
+    slug: "senior-design",
+    title: "Senior Design",
+    subtitle: "Website that displays all projects from senior design, with filtering and search features",
+    category: "web",
+    year: "2025",
+    description:
+      "Website that displays all projects from senior design, with filtering and search features.",
+    stack: ["Drupal 10", "UI Design"],
+    highlights: [
+      "Team-based architecture with divided responsibilities across frontend, backend, and services.",
+      "Service-layer design isolating data logic from routing and presentation.",
+      "Search-driven interaction with seamless navigation from results to detailed views."
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/cseseniordesign/NSPIRE" }
+    ]
   }
 ];
 

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Senior Design full-size image viewer" />
+  <title>Full Image | Senior Design</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <canvas id="bgNoise" aria-hidden="true"></canvas>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="back" href="index.html">Back to Senior Design</a>
+      <div class="title">Full Image</div>
+    </div>
+  </header>
+
+  <main class="viewer-wrap">
+    <section class="card">
+      <h1 id="fullImageTitle">Full Image</h1>
+      <div class="viewer-card">
+        <img id="fullImage" class="full-image" src="assets/Landing page.jpg" alt="Full-size screenshot" />
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">© <span id="year"></span></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
